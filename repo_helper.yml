@@ -1,0 +1,57 @@
+# Configuration for 'repo_helper' (https://github.com/domdfcoding/repo_helper)
+---
+modname: 'formate-trailing-commas'
+copyright_years: '2026'
+author: 'Dominic Davis-Foster'
+email: 'dominic@davis-foster.co.uk'
+username: 'python-formate'
+assignee: 'domdfcoding'
+version: '0.0.0'
+license: 'MIT'
+short_desc: 'Formate plugin to add trailing commas.'
+
+enable_conda: false
+enable_tests: false
+enable_docs: false
+min_coverage: 97
+use_whey: true
+on_pypi: false
+
+python_versions:
+ - '3.7'
+ - '3.8'
+ - '3.9'
+ - "3.10"
+ - "3.11"
+ - "3.12"
+ - "3.13"
+
+keywords:
+ - formatting
+ - linting
+ - commas
+ - formate
+
+classifiers:
+ - "Development Status :: 4 - Beta"
+ - "Intended Audience :: Developers"
+ - 'Environment :: Console'
+
+entry_points:
+  formate_hooks:
+   - "trailing-commas=formate_trailing_commas:trailing_commas_hook"
+
+# mypy_deps:
+#  - types-attrs>=0.2.0
+
+exclude_files:
+ - contributing
+ - pylintrc
+
+# mypy_plugins:
+#  - attr_utils.mypy_plugin
+
+pre_commit_exclude: "^formate_trailing_commas/_vendor/add_trailing_comma/"
+
+# tox_unmanaged:
+#  - flake8
