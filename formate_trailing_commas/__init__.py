@@ -27,15 +27,16 @@ Formate plugin to add trailing commas.
 #
 
 # stdlib
-import itertools
-from collections.abc import Mapping
-from typing import Optional
+from ast import Tuple
 
 # 3rd party
-from domdf_python_tools.paths import PathPlus
-from domdf_python_tools.typing import PathLike
-from domdf_python_tools.words import TAB
-from formate.config import wants_filename, wants_global_config
+from tokenize_rt import src_to_tokens, tokens_to_src
+
+# this package
+from formate_trailing_commas._vendor.add_trailing_comma._ast_helpers import ast_parse
+from formate_trailing_commas._vendor.add_trailing_comma._data import FUNCS, visit
+from formate_trailing_commas._vendor.add_trailing_comma._main import _changing_list, _fix_src
+from formate_trailing_commas._vendor.add_trailing_comma._token_helpers import START_BRACES, find_simple, fix_brace
 
 __author__: str = "Dominic Davis-Foster"
 __copyright__: str = "2026 Dominic Davis-Foster"
@@ -46,22 +47,31 @@ __email__: str = "dominic@davis-foster.co.uk"
 __all__ = ["trailing_commas_hook"]
 
 
-@wants_filename
-@wants_global_config
-def trailing_commas_hook(
-		source: str,
-		formate_filename: PathLike,
-		formate_global_config: Optional[Mapping] = None,
-		**kwargs,
-		) -> str:
+def trailing_commas_hook(source: str, **kwargs) -> str:
 	r"""
 	Call `add-trailing-comma <https://github.com/asottile/add-trailing-comma>`_, using the given keyword arguments as its configuration.
 
 	:param source: The source to reformat.
-	:param formate_global_config: The global configuration dictionary. Optional.
 	:param \*\*kwargs:
 
 	:returns: The reformatted source.
 	"""
 
-	# TODO
+	ast_obj = ast_parse(source)
+	min_version: Tuple[int, int] = kwargs.get("min-version", (3, 6))
+
+	callbacks = visit(FUNCS, ast_obj, min_version)
+
+	tokens = src_to_tokens(source)
+	for i, token in _changing_list(tokens):
+		# DEDENT is a zero length token
+		if not token.src:
+			continue
+
+		for callback in callbacks.get(token.offset, ()):
+			callback(i, tokens)
+
+		if token.src in START_BRACES:
+			fix_brace(tokens, find_simple(i, tokens), add_comma=False, remove_comma=False)
+
+	return tokens_to_src(tokens)
