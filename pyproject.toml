@@ -4,7 +4,7 @@ build-backend = "whey"
 
 [project]
 name = "formate-trailing-commas"
-version = "0.0.0"
+version = "0.1.0"
 description = "Formate plugin to add trailing commas."
 readme = "README.rst"
 keywords = [ "commas", "formate", "formatting", "linting",]
