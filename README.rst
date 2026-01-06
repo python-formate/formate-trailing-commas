@@ -17,8 +17,10 @@ formate-trailing-commas
 
 	* - Tests
 	  - |actions_linux| |actions_windows| |actions_macos|
+	* - PyPI
+	  - |pypi-version| |supported-versions| |supported-implementations| |wheel|
 	* - Activity
-	  - |commits-latest| |commits-since| |maintained|
+	  - |commits-latest| |commits-since| |maintained| |pypi-downloads|
 	* - QA
 	  - |codefactor| |actions_flake8| |actions_mypy|
 	* - Other
@@ -52,6 +54,22 @@ formate-trailing-commas
 	:target: https://www.codefactor.io/repository/github/python-formate/formate-trailing-commas
 	:alt: CodeFactor Grade
 
+.. |pypi-version| image:: https://img.shields.io/pypi/v/formate-trailing-commas
+	:target: https://pypi.org/project/formate-trailing-commas/
+	:alt: PyPI - Package Version
+
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/formate-trailing-commas?logo=python&logoColor=white
+	:target: https://pypi.org/project/formate-trailing-commas/
+	:alt: PyPI - Supported Python Versions
+
+.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/formate-trailing-commas
+	:target: https://pypi.org/project/formate-trailing-commas/
+	:alt: PyPI - Supported Implementations
+
+.. |wheel| image:: https://img.shields.io/pypi/wheel/formate-trailing-commas
+	:target: https://pypi.org/project/formate-trailing-commas/
+	:alt: PyPI - Wheel
+
 .. |license| image:: https://img.shields.io/github/license/python-formate/formate-trailing-commas
 	:target: https://github.com/python-formate/formate-trailing-commas/blob/master/LICENSE
 	:alt: License
@@ -70,6 +88,10 @@ formate-trailing-commas
 .. |maintained| image:: https://img.shields.io/maintenance/yes/2026
 	:alt: Maintenance
 
+.. |pypi-downloads| image:: https://img.shields.io/pypi/dm/formate-trailing-commas
+	:target: https://pypi.org/project/formate-trailing-commas/
+	:alt: PyPI - Downloads
+
 .. end shields
 
 Installation
@@ -77,12 +99,12 @@ Installation
 
 .. start installation
 
-``formate-trailing-commas`` can be installed from GitHub.
+``formate-trailing-commas`` can be installed from PyPI.
 
 To install with ``pip``:
 
 .. code-block:: bash
 
-	$ python -m pip install git+https://github.com/python-formate/formate-trailing-commas
+	$ python -m pip install formate-trailing-commas
 
 .. end installation

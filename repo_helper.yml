@@ -15,7 +15,6 @@ enable_tests: false
 enable_docs: false
 min_coverage: 97
 use_whey: true
-on_pypi: false
 
 python_versions:
  - '3.7'
