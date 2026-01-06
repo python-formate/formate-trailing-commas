@@ -27,7 +27,9 @@ Formate plugin to add trailing commas.
 #
 
 # stdlib
-from ast import Tuple
+import ast
+from collections import defaultdict
+from typing import Tuple, Type
 
 # 3rd party
 from tokenize_rt import src_to_tokens, tokens_to_src
@@ -46,8 +48,14 @@ __email__: str = "dominic@davis-foster.co.uk"
 
 __all__ = ["trailing_commas_hook"]
 
+# TODO: leave closing commas alone
 
-def trailing_commas_hook(source: str, **kwargs) -> str:
+
+def trailing_commas_hook(
+		source: str,
+		min_version: Tuple[int, int] = (3, 6),
+		**kwargs,
+		) -> str:
 	r"""
 	Call `add-trailing-comma <https://github.com/asottile/add-trailing-comma>`_, using the given keyword arguments as its configuration.
 
@@ -58,20 +66,31 @@ def trailing_commas_hook(source: str, **kwargs) -> str:
 	"""
 
 	ast_obj = ast_parse(source)
-	min_version: Tuple[int, int] = kwargs.get("min-version", (3, 6))
 
-	callbacks = visit(FUNCS, ast_obj, min_version)
+	enabled_funcs = defaultdict(list)
+
+	ast_class: Type[ast.AST]
+	for ast_class, func in FUNCS.items():
+		class_name = ast_class.__name__
+		option_name = f"format_{class_name}"
+
+		enabled: bool = kwargs.get(option_name.lower(), kwargs.get(option_name, True))
+
+		if enabled:
+			enabled_funcs[ast_class] = func
+
+	callbacks = visit(enabled_funcs, ast_obj, min_version)
 
 	tokens = src_to_tokens(source)
 	for i, token in _changing_list(tokens):
-		# DEDENT is a zero length token
-		if not token.src:
-			continue
+		# # DEDENT is a zero length token
+		# if not token.src:
+		# 	continue
 
 		for callback in callbacks.get(token.offset, ()):
 			callback(i, tokens)
 
-		if token.src in START_BRACES:
-			fix_brace(tokens, find_simple(i, tokens), add_comma=False, remove_comma=False)
+		# if token.src in START_BRACES:
+		# 	fix_brace(tokens, find_simple(i, tokens), add_comma=False, remove_comma=False)
 
 	return tokens_to_src(tokens)
