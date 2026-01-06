@@ -77,7 +77,7 @@ formate-trailing-commas
 .. |language| image:: https://img.shields.io/github/languages/top/python-formate/formate-trailing-commas
 	:alt: GitHub top language
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/python-formate/formate-trailing-commas/v0.1.0
+.. |commits-since| image:: https://img.shields.io/github/commits-since/python-formate/formate-trailing-commas/v0.1.0.post1
 	:target: https://github.com/python-formate/formate-trailing-commas/pulse
 	:alt: GitHub commits since tagged version
 

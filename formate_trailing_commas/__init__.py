@@ -42,7 +42,7 @@ from formate_trailing_commas._vendor.add_trailing_comma._main import _changing_l
 __author__: str = "Dominic Davis-Foster"
 __copyright__: str = "2026 Dominic Davis-Foster"
 __license__: str = "MIT License"
-__version__: str = "0.1.0"
+__version__: str = "0.1.0.post1"
 __email__: str = "dominic@davis-foster.co.uk"
 
 __all__ = ["trailing_commas_hook"]
