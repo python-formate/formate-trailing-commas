@@ -55,3 +55,6 @@ pre_commit_exclude: "^formate_trailing_commas/_vendor/add_trailing_comma/"
 
 # tox_unmanaged:
 #  - flake8
+
+manifest_additional:
+ - recursive-include formate_trailing_commas/_vendor *

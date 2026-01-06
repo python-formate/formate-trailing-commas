@@ -32,13 +32,12 @@ from collections import defaultdict
 from typing import Tuple, Type
 
 # 3rd party
-from tokenize_rt import src_to_tokens, tokens_to_src
+from tokenize_rt import src_to_tokens, tokens_to_src  # type: ignore[import-untyped]
 
 # this package
 from formate_trailing_commas._vendor.add_trailing_comma._ast_helpers import ast_parse
 from formate_trailing_commas._vendor.add_trailing_comma._data import FUNCS, visit
-from formate_trailing_commas._vendor.add_trailing_comma._main import _changing_list, _fix_src
-from formate_trailing_commas._vendor.add_trailing_comma._token_helpers import START_BRACES, find_simple, fix_brace
+from formate_trailing_commas._vendor.add_trailing_comma._main import _changing_list
 
 __author__: str = "Dominic Davis-Foster"
 __copyright__: str = "2026 Dominic Davis-Foster"
@@ -60,6 +59,7 @@ def trailing_commas_hook(
 	Call `add-trailing-comma <https://github.com/asottile/add-trailing-comma>`_, using the given keyword arguments as its configuration.
 
 	:param source: The source to reformat.
+	:param min_version: Minimum Python version to retain compatibility with.
 	:param \*\*kwargs:
 
 	:returns: The reformatted source.

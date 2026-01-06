@@ -37,6 +37,7 @@ python-implementations = [ "CPython",]
 platforms = [ "Windows", "macOS", "Linux",]
 license-key = "MIT"
 package = "formate_trailing_commas"
+additional-files = [ "recursive-include formate_trailing_commas/_vendor *",]
 
 [tool.mypy]
 python_version = "3.9"
@@ -47,6 +48,10 @@ no_implicit_optional = true
 plugins = [ "attr_utils.mypy_plugin",]
 show_error_codes = true
 exclude = "tests/data"
+
+[[tool.mypy.overrides]]
+module = "formate_trailing_commas._vendor.*"
+ignore_errors = true
 
 [tool.snippet-fmt]
 directives = [ "code-block",]
