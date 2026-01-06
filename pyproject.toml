@@ -77,3 +77,6 @@ requirements = "formate_trailing_commas/_vendor/requirements.txt"
 patches-dir = "patches"
 namespace = "formate_trailing_commas._vendor"
 protected-files = [ "__init__.py", "README.rst", "requirements.txt",]
+
+[tool.dep_checker]
+allowed_unused = [ "formate",]
