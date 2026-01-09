@@ -186,14 +186,13 @@ def test_noop_unhugs(src):
 						),
 				# TODO
 				# (
-				#     'x = ("foo"\n'
-				#     '     "bar")',
-
-				#     'x = (\n'
-				#     '    "foo"\n'
-				#     '    "bar"\n'
-				#     ')',
-				# ),
+				# 		'x = ("foo"\n'
+				# 		'     "bar")',
+				# 		'x = (\n'
+				# 		'    "foo"\n'
+				# 		'    "bar"\n'
+				# 		')',
+				# 		),
 				# Regression test for #17
 				(
 						'x("foo", (\n'
@@ -232,32 +231,29 @@ def test_noop_unhugs(src):
 				# TODO
 				# # Regression test for #32
 				# (
-				#     '[a()\n'
-				#     '    for b in c\n'
-				#     '    if (\n'
-				#     '        d\n'
-				#     '    )\n'
-				#     ']',
-
-				#     '[\n'
-				#     '    a()\n'
-				#     '    for b in c\n'
-				#     '    if (\n'
-				#     '        d\n'
-				#     '    )\n'
-				#     ']',
-				# ),
+				# 		'[a()\n'
+				# 		'    for b in c\n'
+				# 		'    if (\n'
+				# 		'        d\n'
+				# 		'    )\n'
+				# 		']',
+				# 		'[\n'
+				# 		'    a()\n'
+				# 		'    for b in c\n'
+				# 		'    if (\n'
+				# 		'        d\n'
+				# 		'    )\n'
+				# 		']',
+				# 		),
 				# pytest.param(
-				#     'x = [x\n'
-				#     '     for x in y()]\n',
-
-				#     'x = [\n'
-				#     '    x\n'
-				#     '    for x in y()\n'
-				#     ']\n',
-
-				#     id='#42: listcomp unhug ends in brace',
-				# ),
+				# 		'x = [x\n'
+				# 		'     for x in y()]\n',
+				# 		'x = [\n'
+				# 		'    x\n'
+				# 		'    for x in y()\n'
+				# 		']\n',
+				# 		id="#42: listcomp unhug ends in brace",
+				# 		),
 				),
 		)
 def test_fix_unhugs(src, expected):

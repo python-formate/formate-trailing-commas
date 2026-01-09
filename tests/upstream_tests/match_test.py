@@ -7,6 +7,7 @@ import pytest
 # this package
 from formate_trailing_commas import trailing_commas_hook
 
+
 @pytest.mark.parametrize(
 		's',
 		(
