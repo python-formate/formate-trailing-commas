@@ -7,26 +7,29 @@ import pytest
 # this package
 from formate_trailing_commas import trailing_commas_hook
 
-# TODO
-# @pytest.mark.parametrize(
-#     's',
-#     (
-#         pytest.param(
-#             'match x:\n'
-#             '    case 1, 2:\n'
-#             '        pass\n',
-#             id='sequence without braces',
-#         ),
-#         pytest.param(
-#             'match x:\n'
-#             '    case a():\n'
-#             '        pass\n',
-#             id='class without args',
-#         ),
-#     ),
-# )
-# def test_noop(s):
-#     assert trailing_commas_hook(s, min_version=(2, 7)) == s
+@pytest.mark.parametrize(
+		's',
+		(
+				pytest.param(
+						'match x:\n'
+						'    case 1, 2:\n'
+						'        pass\n',
+						id="sequence without braces",
+						),
+				pytest.param(
+						'match x:\n'
+						'    case a():\n'
+						'        pass\n',
+						id="class without args",
+						),
+				),
+		)
+def test_noop_or_syntaxerror(s):
+	if sys.version_info >= (3, 10):
+		assert trailing_commas_hook(s, min_version=(2, 7)) == s
+	else:
+		with pytest.raises(SyntaxError, match="invalid syntax"):
+			trailing_commas_hook(s, min_version=(2, 7))
 
 
 @pytest.mark.xfail(sys.version_info < (3, 10), reason="py310+")

@@ -11,12 +11,6 @@ from formate_trailing_commas import trailing_commas_hook
 @pytest.mark.parametrize(
 		"src",
 		(
-				# TODO
-				#     'from threading import Lock\n'
-				#     'with (Lock() as l):\n'
-				#     '    pass',
-				#     id='simple named context manager',
-				# ),
 				pytest.param(
 						'with (\n'
 						'    open("wat")\n'
@@ -32,19 +26,37 @@ from formate_trailing_commas import trailing_commas_hook
 						'     open("/tmp/y.py") as g: pass',
 						id="escaped newline",
 						),
-				# TODO
-				# pytest.param(
-				#     'with (open("/tmp/t.py") as f): pass',
-				#     id='single item',
-				# ),
-				# pytest.param(
-				#     'with (open("/tmp/t.py") as t, open("/tmp/y.py") as y): pass',
-				#     id='single line',
-				# ),
 				),
 		)
 def test_noop(src):
 	assert trailing_commas_hook(src, min_version=(2, 7)) == src
+
+
+@pytest.mark.parametrize(
+		"src",
+		(
+				pytest.param(
+						'from threading import Lock\n'
+						'with (Lock() as l):\n'
+						'    pass',
+						id="simple named context manager",
+						),
+				pytest.param(
+						'with (open("/tmp/t.py") as f): pass',
+						id="single item",
+						),
+				pytest.param(
+						'with (open("/tmp/t.py") as t, open("/tmp/y.py") as y): pass',
+						id="single line",
+						),
+				),
+		)
+def test_noop_or_syntaxerror(src):
+	if sys.version_info >= (3, 9):
+		assert trailing_commas_hook(src, min_version=(2, 7)) == src
+	else:
+		with pytest.raises(SyntaxError, match="invalid syntax"):
+			trailing_commas_hook(src, min_version=(2, 7))
 
 
 @pytest.mark.xfail(sys.version_info < (3, 9), reason="py39+")
