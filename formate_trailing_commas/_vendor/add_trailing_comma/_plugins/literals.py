@@ -92,7 +92,7 @@ def _fix_tuple_py38(
         tokens: list[Token],
         *,
         one_el_tuple: bool,
-) -> None:  # pragma: >=3.8 cover
+) -> None:  # pragma: no cover (<py38)
     fix = find_simple(i, tokens)
 
     # for tuples we *must* find a comma, otherwise it is not a tuple
@@ -121,6 +121,6 @@ def visit_Tuple(
         ):
             func = functools.partial(_fix_tuple, one_el_tuple=is_one_el)
             yield ast_to_offset(node), func
-        else:  # pragma: >=3.8 cover
+        else:  # pragma: no cover (<py38)
             func = functools.partial(_fix_tuple_py38, one_el_tuple=is_one_el)
             yield ast_to_offset(node), func

@@ -17,7 +17,7 @@ from formate_trailing_commas._vendor.add_trailing_comma._token_helpers import fi
 from formate_trailing_commas._vendor.add_trailing_comma._token_helpers import fix_brace
 
 
-if sys.version_info >= (3, 10):  # pragma: >=3.10 cover
+if sys.version_info >= (3, 10):  # pragma: no cover (<py310)
     def _fix_match_class(
             i: int,
             tokens: list[Token],

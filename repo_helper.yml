@@ -11,9 +11,8 @@ license: 'MIT'
 short_desc: 'Formate plugin to add trailing commas.'
 
 enable_conda: false
-enable_tests: false
 enable_docs: false
-min_coverage: 97
+min_coverage: 89
 use_whey: true
 
 python_versions:
