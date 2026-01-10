@@ -93,7 +93,7 @@ formate-trailing-commas
 	:alt: Maintenance
 
 .. |pypi-downloads| image:: https://img.shields.io/pypi/dm/formate-trailing-commas
-	:target: https://pypi.org/project/formate-trailing-commas/
+	:target: https://pypistats.org/packages/formate-trailing-commas
 	:alt: PyPI - Downloads
 
 .. end shields
